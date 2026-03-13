@@ -1,0 +1,10 @@
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config
+# config/database.php # Uncomment this if you want to keep credentials local
