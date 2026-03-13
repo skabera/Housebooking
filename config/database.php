@@ -1,11 +1,15 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db   = 'house_booking_system';
+// Database configuration - Uses Environment Variables if available (standard for Railway/Heroku/Render)
+$host = getenv('MYSQLHOST') ?: 'localhost';
+$user = getenv('MYSQLUSER') ?: 'root';
+$pass = getenv('MYSQLPASSWORD') ?: '';
+$db   = getenv('MYSQLDATABASE') ?: 'house_booking_system';
+$port = getenv('MYSQLPORT') ?: '3306';
 
 try {
-    $pdo = new PDO("mysql:host=$host;charset=utf8mb4", $user, $pass);
+    // Construct DSN - including port for flexibility
+    $dsn = "mysql:host=$host;port=$port;charset=utf8mb4";
+    $pdo = new PDO($dsn, $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // Create database if not exists
